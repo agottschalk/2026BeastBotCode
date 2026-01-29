@@ -4,16 +4,22 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.Swerve;
 
 public class RobotContainer {
+  private PowerDistribution m_pdh = new PowerDistribution(1, ModuleType.kRev);
   private Swerve swerveDrive = new Swerve();
   private XboxController driveController = new XboxController(0);
+  
   public RobotContainer() {
+    SmartDashboard.putData("PDH", m_pdh);
     setDefaultCommands();
     configureBindings();
   }
