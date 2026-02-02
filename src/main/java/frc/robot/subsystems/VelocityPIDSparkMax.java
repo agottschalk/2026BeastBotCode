@@ -8,6 +8,7 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.epilogue.Logged;
+import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
@@ -18,10 +19,18 @@ public class VelocityPIDSparkMax extends SubsystemBase {
   private SparkMax m_motor = new SparkMax(50, MotorType.kBrushless);
 
   /** Creates a new VelocityPIDSparkMax. */
-  public VelocityPIDSparkMax() {}
+  public VelocityPIDSparkMax() {
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  @Override
+  public void initSendable(SendableBuilder builder){
+    builder.setSmartDashboardType(getName());
+    builder.addDoubleProperty("Speed", m_motor::get, null);
+    builder.addDoubleProperty("Temperature", m_motor::getMotorTemperature, null);
   }
 }
